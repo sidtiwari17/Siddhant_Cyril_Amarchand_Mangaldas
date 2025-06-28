@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Siddhant Tiwari | Portfolio for Cyril Amarchand Mangaldas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0f172a; /* slate-900 */
+            color: #e2e8f0; /* slate-200 */
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+        #particle-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* Place canvas behind all content */
+        }
+        .content-wrapper {
+            position: relative;
+            z-index: 1;
+        }
+        .hero-section {
+            background: transparent; /* Background is now handled by the body and canvas */
+        }
+        .glass-card {
+            background: rgba(30, 41, 59, 0.5); /* slate-800 with opacity */
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(51, 65, 85, 0.5); /* slate-700 with opacity */
+        }
+        .btn-primary {
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 30px rgba(56, 189, 248, 0.3);
+        }
+        .section-title-underline {
+            display: inline-block;
+            position: relative;
+            padding-bottom: 12px;
+        }
+        .section-title-underline::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 0;
+            width: 80px;
+            height: 4px;
+            background-color: #0ea5e9; /* sky-500 */
+            border-radius: 2px;
+        }
+        nav {
+            background-color: rgba(15, 23, 42, 0.8); /* slate-900 with opacity */
+            border-bottom: 1px solid #1e293b; /* slate-800 */
+        }
+        nav a:hover {
+            color: #38bdf8;
+        }
+        .tab-button.active {
+            color: #0ea5e9; /* sky-500 */
+            border-color: #0ea5e9; /* sky-500 */
+        }
+        /* Fade-in animation for sections */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="text-slate-200">
+
+    <canvas id="particle-canvas"></canvas>
+
+    <div class="content-wrapper">
+        <!-- Sticky Navigation -->
+        <nav class="backdrop-blur-md shadow-lg sticky top-0 z-50">
+            <div class="container mx-auto px-6">
+                <div class="flex justify-between items-center h-16">
+                    <a href="#" class="text-xl font-bold text-white">Siddhant Tiwari</a>
+                    <div class="hidden md:flex items-center space-x-8">
+                        <a href="#ai-project" class="text-slate-300 font-medium transition-colors duration-300">AI Project</a>
+                        <a href="#internships" class="text-slate-300 font-medium transition-colors duration-300">Legal Experience</a>
+                        <a href="#journey" class="text-slate-300 font-medium transition-colors duration-300">Education</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Header & Hero Section (Optimized for 8-second scan) -->
+        <header class="hero-section text-white">
+            <div class="container mx-auto px-6 pt-24 pb-12 md:pt-32 md:pb-20 text-center">
+                <img src="https://i.ibb.co/ccryvdjF/cam-logo.jpg" alt="CAM Logo" class="h-20 mx-auto mb-8 rounded-lg bg-white p-1">
+                <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-4">A Legal Mind with an AI Edge</h1>
+                <p class="text-lg md:text-xl text-slate-300 mb-12 max-w-3xl mx-auto">I build innovative AI solutions and possess deep expertise in capital markets law, making me a unique asset for Cyril Amarchand Mangaldas's AI-first future.</p>
+                
+                <!-- Key Differentiators -->
+                <div class="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
+                    <div class="text-center">
+                        <div class="text-sky-400 mb-2"><i class="fa-solid fa-rocket fa-2x"></i></div>
+                        <p class="font-semibold">Founder, India's First Free AI Assistant</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-sky-400 mb-2"><i class="fa-solid fa-scale-balanced fa-2x"></i></div>
+                        <p class="font-semibold">Expertise in Capital Markets & Securities Law</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-sky-400 mb-2"><i class="fa-solid fa-graduation-cap fa-2x"></i></div>
+                        <p class="font-semibold">LL.M. from National Law University, Odisha</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-sky-400 mb-2"><i class="fa-solid fa-bullseye fa-2x"></i></div>
+                        <p class="font-semibold">Aligned with CAM's AI-First Vision</p>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="container mx-auto px-6 py-12 md:py-20">
+
+            <!-- AI Assistant Project Section -->
+            <section id="ai-project" class="mb-16 md:mb-24 fade-in-section">
+                 <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 text-white"><span class="section-title-underline">Core Competency: AI Innovation</span></h2>
+                <div class="bg-slate-800/50 ring-1 ring-slate-700/50 text-white rounded-2xl p-8 md:p-16">
+                    <div class="flex flex-col md:flex-row items-center gap-8 md:gap-12">
+                        <div class="md:w-1/2">
+                            <p class="text-sky-400 font-semibold mb-2">Pioneering Initiative</p>
+                            <h3 class="text-3xl md:text-4xl font-bold mb-4 text-white">Built India's First FREE AI Assistant</h3>
+                            <p class="text-slate-300 mb-6">To prove that advanced technology can be made accessible, I single-handedly developed and launched <a href="http://www.excluziv.in" target="_blank" class="text-white font-bold underline hover:text-sky-400">Excluziv.in</a>. This project is a testament to my ability to deliver end-to-end AI solutions.</p>
+                            <a href="http://www.excluziv.in" target="_blank" class="btn-primary inline-block bg-sky-500 text-white font-bold py-3 px-8 rounded-lg text-lg hover:bg-sky-600">
+                                Explore the AI Assistant
+                            </a>
+                        </div>
+                        <div class="md:w-1/2 mt-8 md:mt-0">
+                            <div class="glass-card rounded-xl p-6">
+                                <h4 class="font-bold text-lg mb-4 text-white">Skills Demonstrated:</h4>
+                                <ul class="space-y-3 text-slate-300">
+                                     <li class="flex items-start"><i class="fa-solid fa-check-circle text-sky-400 mt-1 mr-3"></i>Full-Stack Development</li>
+                                     <li class="flex items-start"><i class="fa-solid fa-check-circle text-sky-400 mt-1 mr-3"></i>Large Language Model (LLM) Integration</li>
+                                     <li class="flex items-start"><i class="fa-solid fa-check-circle text-sky-400 mt-1 mr-3"></i>User-Centric UI/UX Design</li>
+                                     <li class="flex items-start"><i class="fa-solid fa-check-circle text-sky-400 mt-1 mr-3"></i>Scalable Cloud Deployment</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Internship Experience Section -->
+            <section id="internships" class="mb-16 md:mb-24 fade-in-section">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 text-white"><span class="section-title-underline">Proven Legal Acumen</span></h2>
+                <div class="max-w-5xl mx-auto md:flex gap-8">
+                    <!-- Tabs -->
+                    <div class="md:w-1/3 mb-8 md:mb-0">
+                        <ul id="tab-buttons" class="flex md:flex-col gap-2">
+                            <li><button data-tab="jural" class="tab-button w-full text-left p-4 rounded-lg border-l-4 transition-all duration-300 font-semibold">JURAL LLP</button></li>
+                            <li><button data-tab="tatva" class="tab-button w-full text-left p-4 rounded-lg border-l-4 transition-all duration-300 font-semibold">TATVA LEGAL</button></li>
+                            <li><button data-tab="j-sagar" class="tab-button w-full text-left p-4 rounded-lg border-l-4 transition-all duration-300 font-semibold">J SAGAR ASSOCIATES</button></li>
+                            <li><button data-tab="azb" class="tab-button w-full text-left p-4 rounded-lg border-l-4 transition-all duration-300 font-semibold">AZB & PARTNERS</button></li>
+                            <li><button data-tab="edge" class="tab-button w-full text-left p-4 rounded-lg border-l-4 transition-all duration-300 font-semibold">EDGE LAW PARTNERS</button></li>
+                            <li><button data-tab="ks" class="tab-button w-full text-left p-4 rounded-lg border-l-4 transition-all duration-300 font-semibold">KS LEGAL & ASSOCIATES</button></li>
+                            <li><button data-tab="vs" class="tab-button w-full text-left p-4 rounded-lg border-l-4 transition-all duration-300 font-semibold">VS LEGAL ASSOCIATES</button></li>
+                        </ul>
+                    </div>
+                    <!-- Tab Content -->
+                    <div class="md:w-2/3">
+                        <div id="tab-content" class="glass-card rounded-xl p-8 min-h-[350px]">
+                            <div id="jural" class="tab-pane hidden">
+                                <h3 class="text-2xl font-bold text-white mb-2">JURAL LLP, NEW DELHI</h3>
+                                <p class="text-sky-400 font-semibold mb-4">May - June 2024</p>
+                                <ul class="list-disc list-outside ml-5 space-y-2 text-slate-300">
+                                    <li>Drafted rejoinders in SEBI enforcement matters.</li>
+                                    <li>Assisted in proceedings before SEBI Whole Time Member.</li>
+                                    <li>Conducted research on SEBI, NCLAT, and SAT developments.</li>
+                                </ul>
+                            </div>
+                            <div id="tatva" class="tab-pane hidden">
+                                 <h3 class="text-2xl font-bold text-white mb-2">TATVA LEGAL, CHENNAI</h3>
+                                <p class="text-sky-400 font-semibold mb-4">December 2022</p>
+                                <ul class="list-disc list-outside ml-5 space-y-2 text-slate-300">
+                                    <li>Researched "Corporate Creditor proceedings against Guarantor under SARFAESI".</li>
+                                    <li>Assisted in contesting debenture holder suits.</li>
+                                    <li>Built defense strategies against ED powers under PMLA.</li>
+                                </ul>
+                            </div>
+                            <div id="j-sagar" class="tab-pane hidden">
+                                <h3 class="text-2xl font-bold text-white mb-2">J SAGAR ASSOCIATES</h3>
+                                <p class="text-sky-400 font-semibold mb-4">September 2022</p>
+                                <ul class="list-disc list-outside ml-5 space-y-2 text-slate-300">
+                                    <li>Vetted joint venture agreements for SEBI (LODR) & Companies Act compliance.</li>
+                                    <li>Researched convertible securities tenure regulations.</li>
+                                    <li>Analyzed FEMA compliance for capital contributions.</li>
+                                </ul>
+                            </div>
+                            <div id="azb" class="tab-pane hidden">
+                                <h3 class="text-2xl font-bold text-white mb-2">AZB & PARTNERS</h3>
+                                <p class="text-sky-400 font-semibold mb-4">March 2022</p>
+                                 <ul class="list-disc list-outside ml-5 space-y-2 text-slate-300">
+                                    <li>Conducted infrastructure investment due diligence.</li>
+                                    <li>Researched letters of comfort classification under IBC 2016.</li>
+                                    <li>Analyzed regulatory compliance for corporate transactions.</li>
+                                </ul>
+                            </div>
+                            <div id="edge" class="tab-pane hidden">
+                                <h3 class="text-2xl font-bold text-white mb-2">EDGE LAW PARTNERS</h3>
+                                <p class="text-sky-400 font-semibold mb-4">August 2022</p>
+                                <ul class="list-disc list-outside ml-5 space-y-2 text-slate-300">
+                                    <li>Researched on SEBI Act, Companies Act, and FEMA regulations.</li>
+                                    <li>Prepared legal notes on securities laws.</li>
+                                    <li>Drafted legal opinions and regulatory communications.</li>
+                                </ul>
+                            </div>
+                            <div id="ks" class="tab-pane hidden">
+                                <h3 class="text-2xl font-bold text-white mb-2">KS LEGAL & ASSOCIATES</h3>
+                                <p class="text-sky-400 font-semibold mb-4">May - June 2022</p>
+                                <ul class="list-disc list-outside ml-5 space-y-2 text-slate-300">
+                                    <li>Researched on SARFAESI and Negotiable Instruments Acts.</li>
+                                    <li>Analyzed Financial Creditor rights under IBC Section 7.</li>
+                                    <li>Researched white collar crimes in capital markets.</li>
+                                </ul>
+                            </div>
+                            <div id="vs" class="tab-pane hidden">
+                                 <h3 class="text-2xl font-bold text-white mb-2">VS LEGAL ASSOCIATES</h3>
+                                <p class="text-sky-400 font-semibold mb-4">December 2021 - December 2022</p>
+                                <ul class="list-disc list-outside ml-5 space-y-2 text-slate-300">
+                                    <li>Compiled legal briefs for complex corporate matters.</li>
+                                    <li>Researched on ESG compliance and pharma sector securities.</li>
+                                    <li>Analyzed regulatory frameworks for policy implications.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Education & Work Journey Section -->
+            <section id="journey" class="mb-16 md:mb-24 fade-in-section">
+                 <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 text-white"><span class="section-title-underline">Academic & Founder Foundation</span></h2>
+                <div class="max-w-4xl mx-auto relative">
+                    <div class="absolute left-5 top-5 h-full w-0.5 bg-slate-700"></div>
+                    <div class="relative pl-16 pb-12">
+                        <div class="absolute top-0 left-0 w-10 h-10 bg-sky-500 text-white rounded-full flex items-center justify-center text-xl"><i class="fa-solid fa-rocket"></i></div>
+                        <h3 class="text-sm uppercase text-slate-400 font-semibold">August 2024 - Present</h3>
+                        <h4 class="text-xl font-bold mt-1 text-white">Founder, EXCLUZIV</h4>
+                    </div>
+                    <div class="relative pl-16 pb-12">
+                        <div class="absolute top-0 left-0 w-10 h-10 bg-sky-500 text-white rounded-full flex items-center justify-center text-xl"><i class="fa-solid fa-briefcase"></i></div>
+                        <h3 class="text-sm uppercase text-slate-400 font-semibold">Oct 2024 - Mar 2025</h3>
+                        <h4 class="text-xl font-bold mt-1 text-white">Researcher, <a href="https://www.youtube.com/@LegalCommentary" target="_blank" class="text-sky-400 hover:underline">Legal Commentary</a></h4>
+                    </div>
+                    <div class="relative pl-16 pb-12">
+                         <div class="absolute top-0 left-0 w-10 h-10 bg-sky-500 text-white rounded-full flex items-center justify-center text-xl"><i class="fa-solid fa-graduation-cap"></i></div>
+                        <h3 class="text-sm uppercase text-slate-400 font-semibold">2024 - 2025</h3>
+                        <h4 class="text-xl font-bold mt-1 text-white">Master of Laws (LL.M.), National Law University, Odisha</h4>
+                    </div>
+                     <div class="relative pl-16">
+                        <div class="absolute top-0 left-0 w-10 h-10 bg-sky-500 text-white rounded-full flex items-center justify-center text-xl"><i class="fa-solid fa-award"></i></div>
+                        <h3 class="text-sm uppercase text-slate-400 font-semibold">Graduated with 8.64 CGPA</h3>
+                        <h4 class="text-xl font-bold mt-1 text-white">B.A., LL.B. Hons., Damodaram Sanjivayya National Law University, Visakhapatnam</h4>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-slate-950/50">
+            <div class="container mx-auto px-6 py-12 text-center">
+                <h3 class="text-3xl font-bold text-white mb-2">Ready to Build the Future of Law</h3>
+                <p class="mb-6 max-w-2xl mx-auto text-slate-300">I am eager to discuss how my practical skills in AI development and my legal background can directly support CAM's strategic goals.</p>
+                <div class="flex flex-col md:flex-row justify-center items-center md:space-x-6 space-y-2 md:space-y-0 text-lg">
+                    <p class="text-slate-300">siddhant.tiwari.work@gmail.com</p>
+                    <span class="text-slate-600 hidden md:inline">|</span>
+                    <p class="text-slate-300">+91-9243065129</p>
+                    <span class="text-slate-600 hidden md:inline">|</span>
+                    <a href="https://www.linkedin.com/in/siddhant-tiwari-virtual-assistant/" target="_blank" class="text-slate-300 hover:text-sky-400 transition-colors flex items-center justify-center"><i class="fa-brands fa-linkedin mr-2"></i>LinkedIn</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+    <script>
+        // --- DYNAMIC PARTICLE BACKGROUND SCRIPT ---
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+        
+        let particlesArray;
+
+        // Get mouse position
+        const mouse = {
+            x: null,
+            y: null,
+            radius: 150
+        };
+
+        window.addEventListener('mousemove', (event) => {
+            mouse.x = event.x;
+            mouse.y = event.y;
+        });
+        window.addEventListener('mouseout', () => {
+            mouse.x = null;
+            mouse.y = null;
+        });
+        window.addEventListener('touchmove', (event) => {
+             if (event.touches.length > 0) {
+                mouse.x = event.touches[0].clientX;
+                mouse.y = event.touches[0].clientY;
+            }
+        });
+         window.addEventListener('touchend', () => {
+            mouse.x = null;
+            mouse.y = null;
+        });
+
+
+        // Particle class
+        class Particle {
+            constructor(x, y, directionX, directionY, size, color) {
+                this.x = x;
+                this.y = y;
+                this.directionX = directionX;
+                this.directionY = directionY;
+                this.size = size;
+                this.color = color;
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+            }
+            update() {
+                if (this.x > canvas.width || this.x < 0) {
+                    this.directionX = -this.directionX;
+                }
+                if (this.y > canvas.height || this.y < 0) {
+                    this.directionY = -this.directionY;
+                }
+                this.x += this.directionX;
+                this.y += this.directionY;
+                this.draw();
+            }
+        }
+
+        // Create particle array
+        function init() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            particlesArray = [];
+            let numberOfParticles = (canvas.height * canvas.width) / 9000;
+            // Reduce particles on smaller screens for performance
+            if (window.innerWidth < 768) {
+                numberOfParticles = (canvas.height * canvas.width) / 12000;
+            }
+
+            for (let i = 0; i < numberOfParticles; i++) {
+                let size = (Math.random() * 2) + 1;
+                let x = (Math.random() * ((innerWidth - size * 2) - (size * 2)) + size * 2);
+                let y = (Math.random() * ((innerHeight - size * 2) - (size * 2)) + size * 2);
+                let directionX = (Math.random() * .4) - .2;
+                let directionY = (Math.random() * .4) - .2;
+                let color = 'rgba(148, 163, 184, 0.8)'; // slate-400
+
+                particlesArray.push(new Particle(x, y, directionX, directionY, size, color));
+            }
+        }
+
+        // Connect particles
+        function connect() {
+            let opacityValue = 1;
+            for (let a = 0; a < particlesArray.length; a++) {
+                for (let b = a; b < particlesArray.length; b++) {
+                    let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x)) +
+                                 ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
+                    if (distance < (canvas.width / 7) * (canvas.height / 7)) {
+                        opacityValue = 1 - (distance / 20000);
+                        let dx = mouse.x - particlesArray[a].x;
+                        let dy = mouse.y - particlesArray[a].y;
+                        let mouseDistance = Math.sqrt(dx*dx+dy*dy);
+                        if(mouseDistance < mouse.radius){
+                             ctx.strokeStyle = `rgba(56, 189, 248, ${opacityValue})`; // sky-400
+                        } else {
+                            ctx.strokeStyle = `rgba(51, 65, 85, ${opacityValue})`; // slate-700
+                        }
+                        ctx.lineWidth = 1;
+                        ctx.beginPath();
+                        ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
+                        ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        // Animation loop
+        function animate() {
+            requestAnimationFrame(animate);
+            ctx.clearRect(0, 0, innerWidth, innerHeight);
+
+            for (let i = 0; i < particlesArray.length; i++) {
+                particlesArray[i].update();
+            }
+            connect();
+        }
+
+        // Resize event
+        window.addEventListener('resize', () => {
+            init();
+        });
+
+        init();
+        animate();
+
+
+        // --- TAB SWITCHING SCRIPT ---
+        const tabButtons = document.querySelectorAll('.tab-button');
+        const tabPanes = document.querySelectorAll('.tab-pane');
+        function showTab(tabId) {
+            tabPanes.forEach(pane => pane.id === tabId ? pane.classList.remove('hidden') : pane.classList.add('hidden'));
+            tabButtons.forEach(button => {
+                if (button.dataset.tab === tabId) {
+                    button.classList.add('active', 'bg-slate-700/50');
+                    button.classList.remove('text-slate-300', 'border-transparent');
+                } else {
+                    button.classList.remove('active', 'bg-slate-700/50');
+                    button.classList.add('text-slate-300', 'border-transparent');
+                }
+            });
+        }
+        tabButtons.forEach(button => button.addEventListener('click', () => showTab(button.dataset.tab)));
+        showTab('jural');
+
+
+        // --- FADE-IN ON SCROLL SCRIPT ---
+        const sections = document.querySelectorAll('.fade-in-section');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+
+</body>
+</html>
